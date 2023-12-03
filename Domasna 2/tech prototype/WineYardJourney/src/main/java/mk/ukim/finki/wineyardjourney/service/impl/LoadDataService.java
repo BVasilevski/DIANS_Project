@@ -26,7 +26,7 @@ public class LoadDataService {
     }
 
     public List<Winery> loadDataAndSaveToRepository() throws IOException {
-        File file = new File("D:\\Fakultet\\III Godina\\V Semestar\\Dians\\DIANS_Project\\DIANS_Project\\Domasna 1\\Data\\data.json");
+        File file = new File("src/main/resources/data.json");
         List<Winery> wineries;
         Gson gson = new Gson();
         try (Reader reader = new FileReader(file)) {
