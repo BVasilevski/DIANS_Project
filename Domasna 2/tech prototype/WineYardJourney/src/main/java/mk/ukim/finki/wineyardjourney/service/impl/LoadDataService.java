@@ -12,22 +12,20 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
 import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
+/**
+ * Service for transferring the data from json file to a postgres database, only ran once to migrate the data
+ */
 @Service
 public class LoadDataService {
-    private final ObjectMapper objectMapper;
     private final WineryRepository wineryRepository;
 
-    public LoadDataService(ObjectMapper objectMapper, WineryRepository wineryRepository) {
-        this.objectMapper = objectMapper;
+    public LoadDataService(WineryRepository wineryRepository) {
         this.wineryRepository = wineryRepository;
     }
 
-    public List<Winery> loadDataAndSaveToRepository(String filePath) throws IOException {
+    public List<Winery> loadDataAndSaveToRepository() throws IOException {
         File file = new File("D:\\Fakultet\\III Godina\\V Semestar\\Dians\\DIANS_Project\\DIANS_Project\\Domasna 1\\Data\\data.json");
         List<Winery> wineries;
         Gson gson = new Gson();
