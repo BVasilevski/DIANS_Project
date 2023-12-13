@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Maps Direction Service</title>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCIzvGWwwXfJ13yNIgzEcN8v9MLojr5P-A&libraries=places"></script>
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        var destination = /*[[${destinationAddress}]]*/ '';
+        /*]]>*/
+    </script>
+    <style>
+        #map {
+            height: 400px;
+            width: 100%;
+        }
+
+        #start {
+            margin-bottom: 10px;
+        }
+
+        #directions-panel {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <label for="start">Почетна локација:</label>
+    <input type="text" id="start" placeholder="Внесете почетна локација">
+
+    <div th:if="${destinationAddress}">
+        <p th:text="'Избрана винарија: ' + ${winery.getName() + ' - ' + winery.getTown()}"></p>
+    </div>
+
+    <label for="transportationMode">Начин на превоз:</label>
+    <select id="transportationMode">
+        <option value="DRIVING">Автомобил</option>
+        <option value="WALKING">Пеш</option>
+    </select>
+    <br><br>
+    <button onclick="calculateRoute()">Прикажи рута</button>
+    <br><br>
+</div>
+
+<div id="map"></div>
+<div id="directions-panel"></div>
+
+<script>
+    var map;
+    var directionsService;
+    var directionsRenderer;
+
+    function initMap() {
+        var defaultCenter = {lat: 42, lng: 21};
+
+        var destinationLatLng = destination ? getLatLngFromString(destination) : defaultCenter;
+
+        map = new google.maps.Map(document.getElementById('map'), {
+            center: destinationLatLng,
+            zoom: 12
+        });
+
+        directionsService = new google.maps.DirectionsService();
+        directionsRenderer = new google.maps.DirectionsRenderer({
+            map: map,
+            panel: document.getElementById('directions-panel'),
+            draggable: true
+        });
+
+        var marker = new google.maps.Marker({
+            position: destinationLatLng,
+            map: map,
+            title: 'Destination'
+        });
+    }
+
+    function getLatLngFromString(latlngString) {
+        var latlngArray = latlngString.split(',').map(function (coord) {
+            return parseFloat(coord.trim());
+        });
+
+        return {lat: latlngArray[0], lng: latlngArray[1]};
+    }
+
+
+    function calculateRoute() {
+        var startLocation;
+
+        startLocation = document.getElementById('start').value; // Use custom input
+
+        var transportationModeSelect = document.getElementById('transportationMode');
+        var selectedTransportationMode = transportationModeSelect.value;
+
+        console.log('Selected Transportation Mode:', selectedTransportationMode);
+        console.log('Start Location:', startLocation);
+
+        var request = {
+            origin: startLocation,
+            destination: destination,
+            travelMode: google.maps.TravelMode[selectedTransportationMode]
+        };
+
+        console.log('Direction Request:', request);
+
+        directionsService.route(request, function (response, status) {
+            if (status == 'OK') {
+                directionsRenderer.setDirections(response);
+            } else {
+                window.alert('Directions request failed due to ' + status);
+            }
+        });
+    }
+
+    google.maps.event.addDomListener(window, 'load', initMap);
+</script>
+</body>
+</html>
