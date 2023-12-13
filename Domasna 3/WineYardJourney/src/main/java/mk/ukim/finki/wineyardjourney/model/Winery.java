@@ -31,11 +31,6 @@ public class Winery implements Serializable {
     @SerializedName("Дејност")
     private String activity;
 
-    public Winery(String name, String location, String town, String workingHours, String activity) {
-        this.name = name;
-        this.location = location;
-        this.town = town;
-        this.workingHours = workingHours;
-        this.activity = activity;
-    }
+    @SerializedName("Локација Мапа")
+    private String mapLocation;
 }

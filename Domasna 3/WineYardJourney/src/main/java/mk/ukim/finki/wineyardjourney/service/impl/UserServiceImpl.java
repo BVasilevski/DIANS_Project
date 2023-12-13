@@ -2,6 +2,7 @@ package mk.ukim.finki.wineyardjourney.service.impl;
 
 import mk.ukim.finki.wineyardjourney.model.User;
 import mk.ukim.finki.wineyardjourney.model.Winery;
+import mk.ukim.finki.wineyardjourney.model.exception.UserNotFoundException;
 import mk.ukim.finki.wineyardjourney.repository.UserRepository;
 import mk.ukim.finki.wineyardjourney.repository.WineryRepository;
 import mk.ukim.finki.wineyardjourney.service.UserService;
@@ -22,8 +23,8 @@ public class UserServiceImpl implements UserService {
         this.wineryRepository = wineryRepository;
     }
 
-    public Optional<User> findByUsername(String username) {
-        return Optional.ofNullable(this.userRepository.findByUsername(username));
+    public User findByUsername(String username) {
+        return this.userRepository.findByUsername(username);
     }
 
     @Override
@@ -42,5 +43,18 @@ public class UserServiceImpl implements UserService {
         if (user != null && winery.isPresent()) {
             user.getRecentlyVisited().add(winery.get());
         }
+    }
+
+    @Override
+    public void save(User user) {
+        this.userRepository.save(user);
+    }
+
+    @Override
+    public boolean login(String username, String password) {
+        if (this.userRepository.findByUsernameAndPassword(username, password) == null) {
+            throw new UserNotFoundException();
+        }
+        return true;
     }
 }

@@ -49,6 +49,7 @@
     <p><strong>Град:</strong> <span th:text="${winery.getTown()}"></span></p>
     <p><strong>Работно време:</strong> <span th:text="${winery.getWorkingHours()}"></span></p>
     <p><strong>Дејност:</strong> <span th:text="${winery.getActivity()}"></span></p>
+    <a th:href="@{'/wineries/show-map/{id}' (id=${winery.getId()})}">Show on map</a>
 </div>
 
 </body>
