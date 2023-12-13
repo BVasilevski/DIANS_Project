@@ -40,6 +40,7 @@ public class WineryController {
     public String showOnMap(@PathVariable Long id, Model model) {
         Optional<Winery> winery = this.wineryService.findById(id);
         winery.ifPresent(value -> model.addAttribute("destinationAddress", value.getMapLocation()));
+        winery.ifPresent(value -> model.addAttribute("winery", value));
         return "map";
     }
 }

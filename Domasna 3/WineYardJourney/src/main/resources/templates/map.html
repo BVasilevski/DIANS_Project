@@ -27,15 +27,21 @@
 </head>
 <body>
 <div>
-    <label for="start">Starting Location:</label>
-    <input type="text" id="start" placeholder="Enter starting location">
+    <label for="start">Почетна локација:</label>
+    <input type="text" id="start" placeholder="Внесете почетна локација">
 
-    <!-- Use Thymeleaf variables for the selected winery and its location -->
     <div th:if="${destinationAddress}">
-        <p th:text="'Destination Address: ' + ${destinationAddress}"></p>
+        <p th:text="'Избрана винарија: ' + ${winery.getName() + ' - ' + winery.getTown()}"></p>
     </div>
-    <br>
-    <button onclick="calculateRoute()">Show Route</button>
+
+    <label for="transportationMode">Transportation Mode:</label>
+    <select id="transportationMode">
+        <option value="DRIVING">Автомобил</option>
+        <option value="WALKING">Пеш</option>
+    </select>
+    <br><br>
+    <button onclick="calculateRoute()">Прикажи рута</button>
+    <br><br>
 </div>
 
 <div id="map"></div>
@@ -47,10 +53,8 @@
     var directionsRenderer;
 
     function initMap() {
-        // Default center (San Francisco)
-        var defaultCenter = { lat: 37.7749, lng: -122.4194 };
+        var defaultCenter = {lat: 42, lng: 21};
 
-        // Use the destination as the center if available, otherwise use the default center
         var destinationLatLng = destination ? getLatLngFromString(destination) : defaultCenter;
 
         map = new google.maps.Map(document.getElementById('map'), {
@@ -65,7 +69,6 @@
             draggable: true
         });
 
-        // Add a marker at the destination
         var marker = new google.maps.Marker({
             position: destinationLatLng,
             map: map,
@@ -78,18 +81,28 @@
             return parseFloat(coord.trim());
         });
 
-        return { lat: latlngArray[0], lng: latlngArray[1] };
+        return {lat: latlngArray[0], lng: latlngArray[1]};
     }
 
 
     function calculateRoute() {
-        var startLocation = document.getElementById('start').value;
+        var startLocation;
+
+        startLocation = document.getElementById('start').value; // Use custom input
+
+        var transportationModeSelect = document.getElementById('transportationMode');
+        var selectedTransportationMode = transportationModeSelect.value;
+
+        console.log('Selected Transportation Mode:', selectedTransportationMode);
+        console.log('Start Location:', startLocation);
 
         var request = {
             origin: startLocation,
             destination: destination,
-            travelMode: google.maps.TravelMode.DRIVING
+            travelMode: google.maps.TravelMode[selectedTransportationMode]
         };
+
+        console.log('Direction Request:', request);
 
         directionsService.route(request, function (response, status) {
             if (status == 'OK') {
@@ -99,7 +112,7 @@
             }
         });
     }
-    // Initialize the map when the page loads
+
     google.maps.event.addDomListener(window, 'load', initMap);
 </script>
 </body>
