@@ -1,8 +1,8 @@
-# MacedonianVineyardJourney
+# MacedonianWineyardJourney
 
 Предмет: Дизајн и архитектура на софтвер
 
-**Име на апликацијата**: MacedonianVineyardJourney
+**Име на апликацијата**: MacedonianWineyardJourney
 
 **Автори**:
 - Лихнида Јованова - 201034
