@@ -8,6 +8,7 @@
         * {
             box-sizing: border-box;
         }
+
         body {
             display: grid;
             width: 100%;
@@ -23,32 +24,39 @@
             background-size: cover;
 
         }
-        .container2{
+
+        .container2 {
             display: flex;
             flex-direction: column;
             align-items: center;
         }
-        .container1{
+
+        .container1 {
             display: flex;
             flex-direction: column;
             align-items: center;
         }
-        .nav{
+
+        .nav {
             display: flex;
             flex-direction: column;
             align-items: center;
             width: 40%;
         }
-        .nav a:first-of-type{
+
+        .nav a:first-of-type {
             background-color: #ff3131;
         }
-        .nav a:hover{
+
+        .nav a:hover {
             background-color: #c65673;
         }
-        .nav a:first-of-type:hover{
+
+        .nav a:first-of-type:hover {
             background-color: #ff7575;
         }
-        .nav a{
+
+        .nav a {
             color: white;
             text-decoration: none;
             margin-bottom: 30%;
@@ -61,20 +69,22 @@
             font-size: 20px;
         }
 
-        .container1 .logo-container img{
+        .container1 .logo-container img {
             width: 100%;
             height: auto;
 
         }
-        .container2 img{
+
+        .container2 img {
             width: 70%;
             padding-bottom: 5%;
             padding-top: 5%;
             height: 608px;
         }
+
         @media only screen and (max-width: 768px) {
             /* Smaller screen */
-            body{
+            body {
                 display: flex;
                 flex-direction: column;
                 align-items: center;
@@ -84,7 +94,7 @@
         }
     </style>
 </head>
-<body >
+<body>
 <div class="container1">
     <div class="logo-container">
         <img src="LogoVineyardJourney.png" alt="Logo">
@@ -95,10 +105,9 @@
         <a th:href="@{'/wineries'}">Wineries</a>
         <a th:href="@{'/about-us'}">About Us</a>
     </div>
-</div>
-
-<div class="container2">
-    <img src="WinePicture.png" alt="Wine Picture">
+    <div class="container2">
+        <img src="WinePicture.png" alt="Wine Picture">
+    </div>
 </div>
 </body>
 </html>

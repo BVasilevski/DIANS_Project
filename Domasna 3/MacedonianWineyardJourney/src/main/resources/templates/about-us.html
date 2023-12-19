@@ -29,96 +29,113 @@
             grid-template-columns: 30% 70%;
             height: 100%;
         }
-        .row2{
+
+        .row2 {
             width: 100%;
             height: 100%;
             display: flex;
             justify-content: center;
         }
-        .container-Bojan{
+
+        .container-Bojan {
             display: grid;
             grid-template-columns: 40% 60%;
             width: 25%;
             height: 100%;
             margin-right: -20%;
         }
-        .arrow{
+
+        .arrow {
             background: url("Arrow3.png") no-repeat bottom;
             background-size: contain;
         }
-        .container-name-sheet{
+
+        .container-name-sheet {
             display: grid;
             padding: 5%;
             grid-template-rows: 25% 75%;
         }
-        .sheet{
+
+        .sheet {
             background: url("Sticker.png") no-repeat;
             margin-right: 5%;
             margin-left: 5%;
             background-size: cover;
         }
-        .name-B{
-            background: url("Bojan.png") no-repeat center center ;
+
+        .name-B {
+            background: url("Bojan.png") no-repeat center center;
             margin-bottom: 5%;
             background-size: cover;
         }
-        .row3{
+
+        .row3 {
             display: grid;
             grid-template-columns: 20% 60% 20%;
         }
-        .container-darko{
+
+        .container-darko {
             display: grid;
             padding: 5%;
             grid-template-rows: 80% 20%;
         }
-        .name-D{
+
+        .name-D {
             background: url("Darko.png") no-repeat center left;
             margin-bottom: 5%;
             margin-right: 2%;
             background-size: cover;
         }
-        .container-group-pic{
+
+        .container-group-pic {
             display: grid;
             grid-template-rows: 80% 20%;
         }
-        .arr-pic-arr{
+
+        .arr-pic-arr {
             display: grid;
             grid-template-columns: 15% 70% 15%;
         }
-        .arrow-1{
+
+        .arrow-1 {
             background: url("Arrow1.png") no-repeat bottom left;
             background-size: contain;
             margin-right: -50%;
             margin-bottom: -20%;
         }
-        .gr-pic{
+
+        .gr-pic {
             background: url("GroupPic.png") no-repeat center left;
             margin-top: -10%;
             background-size: 100% 100%;
         }
-        .arrow-2{
+
+        .arrow-2 {
             background: url("Arrow2.png") no-repeat center left;
             margin-left: -50%;
             margin-top: -50%;
             background-size: contain;
         }
-        .container-lihnida{
+
+        .container-lihnida {
             display: grid;
             padding: 5%;
             grid-template-rows: 20% 80%;
         }
-        .name-L{
+
+        .name-L {
             background: url("Lihnida.png") no-repeat top center;
             margin-right: 5%;
             background-size: contain;
         }
-        .Logo{
+
+        .Logo {
             background: url("Logo.png") no-repeat center center;
             background-size: 100% 100%;
             height: 100%;
         }
 
-        .nav{
+        .nav {
             display: flex;
             flex-direction: row;
             padding: 0;
@@ -128,7 +145,7 @@
             align-self: center;
         }
 
-        .nav a{
+        .nav a {
             color: white;
             text-decoration: none;
             vertical-align: middle;
@@ -141,25 +158,31 @@
             width: 15%;
             height: 100%;
         }
-        .nav a:nth-of-type(3){
+
+        .nav a:nth-of-type(3) {
             background-color: #ff3131;
         }
-        .nav a:hover{
+
+        .nav a:hover {
             background-color: #c65673;
         }
-        .nav a:nth-of-type(3):hover{
+
+        .nav a:nth-of-type(3):hover {
             background-color: #ff7575;
         }
+
         @media only screen and (max-width: 768px) {
             /* Smaller screen */
-            .row1{
+            .row1 {
                 display: grid;
                 grid-template-rows: 50% 50%;
             }
-            .nav{
+
+            .nav {
                 max-height: 50%;
             }
-            body{
+
+            body {
                 display: grid;
                 grid-template-rows: 33% 33% 33%;
                 width: 100%;
@@ -210,6 +233,13 @@
                 <span class="sheet">#Index Probishtip</span>
             </span>
         </span>
+<!--    <div class="navbar">-->
+<!--        <a th:href="@{'/home'}">Home</a>-->
+<!--        <a th:href="@{'/wineries'}">Wineries</a>-->
+<!--        <a th:href="@{'/about-us'}">About us</a>-->
+<!--        <a th:if="${session.user == null}" th:href="@{'/login'}">Login</a>-->
+<!--        <a th:if="${session.user != null}" th:href="@{'/logout'}">Logout</a>-->
+<!--    </div>-->
 </div>
 </body>
 </html>

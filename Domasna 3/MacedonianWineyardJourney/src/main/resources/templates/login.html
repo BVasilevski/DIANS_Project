@@ -58,8 +58,14 @@
 
         <button type="submit">Login</button>
         <br><br>
-        <button type="button"><a th:href="@{'/register'}">Register</a></button>
+        <button type="button" onclick="window.location.href='/register'">Register</button>
     </form>
+<!--<<<<<<< Updated upstream-->
+<!--=======-->
+<!--    <th:block th:if="${hasError}">-->
+<!--        <div th:text="${error}" style="color:red; text-align: center"></div>-->
+<!--    </th:block>-->
+<!--&gt;>>>>>> Stashed changes-->
 </div>
 </body>
 </html>

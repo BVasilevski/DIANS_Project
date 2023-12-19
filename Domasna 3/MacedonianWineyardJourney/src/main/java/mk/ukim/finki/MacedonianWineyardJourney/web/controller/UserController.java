@@ -61,7 +61,13 @@ public class UserController {
             return "login";
         }
         request.getSession().setAttribute("user", user);
-        return "redirect:/wineries";
+        return "redirect:/home";
+    }
+
+    @GetMapping("/logout")
+    private String logoutUser(HttpServletRequest request) {
+        request.getSession().removeAttribute("user");
+        return "redirect:/home";
     }
 }
 

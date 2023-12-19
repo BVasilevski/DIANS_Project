@@ -25,8 +25,8 @@ public class UserServiceImpl implements UserService {
         this.wineryRepository = wineryRepository;
     }
 
-    public Optional<User> findByUsername(String username) {
-        return Optional.of(this.userRepository.findByUsername(username).orElseThrow(UserNotFoundException::new));
+    public User findByUsername(String username) {
+        return this.userRepository.findByUsername(username).orElseThrow(UserNotFoundException::new);
     }
 
     @Override
@@ -45,9 +45,20 @@ public class UserServiceImpl implements UserService {
         Optional<Winery> winery = wineryRepository.findById(wineryId);
 
         if (winery.isPresent() && user != null) {
+            List<Winery> recentlyVisited = user.getRecentlyVisited();
+
+            // Check if the winery is already in the list
+            boolean wineryExists = recentlyVisited.stream()
+                    .anyMatch(w -> w.getId().equals(wineryId));
+
+            if (wineryExists) {
+                // Remove the previous appearance of the winery
+                recentlyVisited.removeIf(w -> w.getId().equals(wineryId));
+            }
+
             // Create a temporary list without the first element
-            List<Winery> tempRecentlyVisited = new ArrayList<>(user.getRecentlyVisited());
-            if (!tempRecentlyVisited.isEmpty()) {
+            List<Winery> tempRecentlyVisited = new ArrayList<>(recentlyVisited);
+            if (!tempRecentlyVisited.isEmpty() && tempRecentlyVisited.size() >= 5) {
                 tempRecentlyVisited.remove(0);
             }
 
@@ -59,6 +70,7 @@ public class UserServiceImpl implements UserService {
             user.getRecentlyVisited().addAll(tempRecentlyVisited);
         }
     }
+
 
     @Override
     public void save(User user) {

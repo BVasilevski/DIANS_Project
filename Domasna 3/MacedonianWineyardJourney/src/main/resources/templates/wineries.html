@@ -20,7 +20,8 @@
             background: url("BgBlack.png") no-repeat;
             background-size: cover;
         }
-        .container{
+
+        .container {
             display: grid;
             width: 100%;
             height: auto;
@@ -30,19 +31,21 @@
             background: url("BgBlack.png") no-repeat;
             background-size: 100% 100%;
         }
+
         .row1 {
             display: grid;
             width: 100%;
             grid-template-columns: 30% 70%;
             height: 100%;
         }
-        .Logo{
+
+        .Logo {
             background: url("Logo.png") no-repeat center center;
             background-size: 100% 100%;
             height: 100%;
         }
 
-        .nav{
+        .nav {
             display: flex;
             flex-direction: row;
             padding: 0;
@@ -52,7 +55,7 @@
             align-self: center;
         }
 
-        .nav a{
+        .nav a {
             color: white;
             text-decoration: none;
             vertical-align: middle;
@@ -65,27 +68,32 @@
             width: 15%;
             height: 100%;
         }
-        .nav a:nth-of-type(2){
+
+        .nav a:nth-of-type(2) {
             background-color: #ff3131;
         }
-        .nav a:hover{
+
+        .nav a:hover {
             background-color: #c65673;
         }
-        .nav a:nth-of-type(2):hover{
+
+        .nav a:nth-of-type(2):hover {
             background-color: #ff7575;
         }
 
-        .row2{
+        .row2 {
             margin-left: 5%;
             margin-right: 5%;
             margin-bottom: 5%;
 
         }
-        .winery-list{
+
+        .winery-list {
             width: 100%;
             height: auto;
             padding: 2vh;
         }
+
         .winery-card {
             width: 20%;
             display: inline-block;
@@ -93,19 +101,41 @@
             color: white;
             margin: 2vh;
         }
-        .winery-card h2{
+
+        .winery-card h2 {
             font-size: 22px;
         }
-        .winery-card li{
+
+        .winery-card li {
             border-bottom: solid white 1px;
             margin-bottom: 2vh;
         }
-        button{
+
+        button {
             margin-left: 25%;
+        }
+
+        /* Style to move login, logout, and username to the right */
+        .navbar-right {
+            float: right;
+        }
+
+        .navbar a, .navbar-right a {
+            display: inline-block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        .navbar a:hover, .navbar-right a:hover {
+            background-color: #ddd;
+            color: black;
         }
     </style>
 </head>
 <body>
+<<<<<<< Updated upstream
 <div class="container">
     <div class="row1">
         <div class="Logo"></div>
@@ -143,5 +173,23 @@
         </div>
     </div>
 </div>
+<!--=======-->
+<!--<script th:inline="javascript">-->
+<!--    /*<![CDATA[*/-->
+<!--    // Check if a variable indicating access denied is set-->
+<!--    var accessDenied = /*[[${accessDenied}]]*/ false;-->
+
+<!--    // Display alert if access is denied-->
+<!--    if (accessDenied) {-->
+<!--        alert('Sorry, you don\'t have access to this page!'); // You can customize this alert message-->
+<!--    }-->
+<!--    /*]]>*/-->
+<!--</script>-->
+<!-- Navigation bar container -->
+
+<!--<div th:if="${recentlyVisited != null and recentlyVisited.size() > 0}">-->
+<!--    <div th:each="winery : ${recentlyVisited}">-->
+<!--        <p th:text="${winery.getName()}"></p>-->
+<!--    </div>-->
 </body>
 </html>

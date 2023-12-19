@@ -4,6 +4,7 @@ import mk.ukim.finki.MacedonianWineyardJourney.service.impl.LoadDataService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+
 @SpringBootApplication
 public class MacedonianWineyardJourneyApplication {
     public static void main(String[] args) {
@@ -19,7 +20,6 @@ public class MacedonianWineyardJourneyApplication {
     public MacedonianWineyardJourneyApplication(LoadDataService loadDataService) {
         this.loadDataService = loadDataService;
     }
-
 
 //    @Override
 //    public void run(String... args) throws Exception {
