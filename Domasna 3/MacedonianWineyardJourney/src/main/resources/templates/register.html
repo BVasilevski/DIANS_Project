@@ -6,7 +6,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            background: url("/static/BgBlack.png") no-repeat;
             margin: 0;
             display: flex;
             justify-content: center;
@@ -15,7 +15,7 @@
         }
 
         .register-container {
-            background-color: white;
+            background-color: red;
             border: 1px solid #ddd;
             border-radius: 8px;
             padding: 20px;
@@ -24,6 +24,7 @@
 
         input {
             width: 100%;
+            background-color: gray;
             padding: 10px;
             margin-bottom: 10px;
             box-sizing: border-box;
@@ -32,7 +33,7 @@
         button {
             width: 100%;
             padding: 10px;
-            background-color: #4caf50;
+            background-color: black;
             color: white;
             border: none;
             border-radius: 4px;
@@ -40,16 +41,9 @@
         }
 
         button:hover {
-            background-color: #45a049;
+            background-color: #333;
         }
 
-        .dob-container {
-            background-color: white;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            padding: 20px;
-            width: 300px;
-        }
     </style>
 </head>
 <body>
@@ -70,9 +64,6 @@
 
         <button type="submit">Register</button>
     </form>
-    <th:block th:if="${hasError}">
-        <p style="color:red">Invalid input</p>
-    </th:block>
 </div>
 </body>
 </html>

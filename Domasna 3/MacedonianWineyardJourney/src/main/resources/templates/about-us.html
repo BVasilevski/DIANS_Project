@@ -2,34 +2,214 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About us</title>
     <style>
-        .navbar {
-            background-color: #333;
-            overflow: hidden;
-            text-align: center;
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
 
-        .navbar a {
-            display: inline-block;
+        body {
+            display: grid;
+            width: 100%;
+            height: 100vh;
+            margin: 0;
+            grid-template-rows: 20% 30% 50%;
+            /*background: url("/static/BgBlack.png") ako go testirash samo HTML*/
+            /*Za sekoja dole toa vazhi*/
+            background: url("BgBlack.png") no-repeat;
+            background-size: cover;
+        }
+
+        .row1 {
+            display: grid;
+            width: 100%;
+            grid-template-columns: 30% 70%;
+            height: 100%;
+        }
+        .row2{
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+        }
+        .container-Bojan{
+            display: grid;
+            grid-template-columns: 40% 60%;
+            width: 25%;
+            height: 100%;
+            margin-right: -20%;
+        }
+        .arrow{
+            background: url("Arrow3.png") no-repeat bottom;
+            background-size: contain;
+        }
+        .container-name-sheet{
+            display: grid;
+            padding: 5%;
+            grid-template-rows: 25% 75%;
+        }
+        .sheet{
+            background: url("Sticker.png") no-repeat;
+            margin-right: 5%;
+            margin-left: 5%;
+            background-size: cover;
+        }
+        .name-B{
+            background: url("Bojan.png") no-repeat center center ;
+            margin-bottom: 5%;
+            background-size: cover;
+        }
+        .row3{
+            display: grid;
+            grid-template-columns: 20% 60% 20%;
+        }
+        .container-darko{
+            display: grid;
+            padding: 5%;
+            grid-template-rows: 80% 20%;
+        }
+        .name-D{
+            background: url("Darko.png") no-repeat center left;
+            margin-bottom: 5%;
+            margin-right: 2%;
+            background-size: cover;
+        }
+        .container-group-pic{
+            display: grid;
+            grid-template-rows: 80% 20%;
+        }
+        .arr-pic-arr{
+            display: grid;
+            grid-template-columns: 15% 70% 15%;
+        }
+        .arrow-1{
+            background: url("Arrow1.png") no-repeat bottom left;
+            background-size: contain;
+            margin-right: -50%;
+            margin-bottom: -20%;
+        }
+        .gr-pic{
+            background: url("GroupPic.png") no-repeat center left;
+            margin-top: -10%;
+            background-size: 100% 100%;
+        }
+        .arrow-2{
+            background: url("Arrow2.png") no-repeat center left;
+            margin-left: -50%;
+            margin-top: -50%;
+            background-size: contain;
+        }
+        .container-lihnida{
+            display: grid;
+            padding: 5%;
+            grid-template-rows: 20% 80%;
+        }
+        .name-L{
+            background: url("Lihnida.png") no-repeat top center;
+            margin-right: 5%;
+            background-size: contain;
+        }
+        .Logo{
+            background: url("Logo.png") no-repeat center center;
+            background-size: 100% 100%;
+            height: 100%;
+        }
+
+        .nav{
+            display: flex;
+            flex-direction: row;
+            padding: 0;
+            margin: 0;
+            height: 35%;
+            justify-content: center;
+            align-self: center;
+        }
+
+        .nav a{
             color: white;
-            text-align: center;
-            padding: 14px 16px;
             text-decoration: none;
+            vertical-align: middle;
+            text-align: center;
+            padding-top: 1%;
+            background-color: #9b2242;
+            margin-right: 8%;
+            font-family: SansSerif;
+            font-size: 20px;
+            width: 15%;
+            height: 100%;
+        }
+        .nav a:nth-of-type(3){
+            background-color: #ff3131;
+        }
+        .nav a:hover{
+            background-color: #c65673;
+        }
+        .nav a:nth-of-type(3):hover{
+            background-color: #ff7575;
+        }
+        @media only screen and (max-width: 768px) {
+            /* Smaller screen */
+            .row1{
+                display: grid;
+                grid-template-rows: 50% 50%;
+            }
+            .nav{
+                max-height: 50%;
+            }
+            body{
+                display: grid;
+                grid-template-rows: 33% 33% 33%;
+                width: 100%;
+                height: auto;
+            }
         }
 
-        .navbar a:hover {
-            background-color: #ddd;
-            color: black;
-        }
     </style>
 </head>
 <body>
-<div class="navbar">
-    <a th:href="@{'/home'}">Home</a>
-    <a th:href="@{'/wineries'}">Wineries</a>
-    <a th:href="@{'/about-us'}">About us</a>
+<div class="row1">
+    <div class="Logo"></div>
+    <div class="nav">
+        <a th:href="@{'/home'}">Home</a>
+        <a th:href="@{'/wineries'}">Wineries</a>
+        <a th:href="@{'/about-us'}">About us</a>
+    </div>
 </div>
-<h1>This will be the about us page</h1>
+<div class="row2">
+        <span class="container-Bojan">
+            <span class="arrow"></span>
+            <span class="container-name-sheet">
+                <span class="name-B"></span>
+                <span class="sheet"> #Index Skopje</span>
+            </span>
+        </span>
+</div>
+<div class="row3">
+        <span class="container-darko">
+            <span class="container-name-sheet">
+                <span class="name-D"></span>
+                <span class="sheet">#Index Shtip</span>
+            </span>
+            <span></span>
+        </span>
+    <span class="container-group-pic">
+            <span class="arr-pic-arr">
+                <span class="arrow-1"></span>
+                <span class="gr-pic"></span>
+                <span class="arrow-2"></span>
+            </span>
+            <span></span>
+        </span>
+    <span class="container-lihnida">
+            <span></span>
+            <span class="container-name-sheet">
+                <span class="name-L"></span>
+                <span class="sheet">#Index Probishtip</span>
+            </span>
+        </span>
+</div>
 </body>
 </html>
