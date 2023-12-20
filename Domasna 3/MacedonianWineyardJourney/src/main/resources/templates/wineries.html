@@ -26,7 +26,7 @@
             width: 100%;
             height: auto;
             margin: 0;
-            grid-template-rows: 20vh auto auto auto;
+            grid-template-rows: 20vh auto auto auto auto;
             /*background: url("/static/BgBlack.png") ako go testirash samo HTML*/
             background: url("BgBlack.png") no-repeat;
             background-size: 100% 100%;
@@ -162,9 +162,22 @@
             transition: background-color 0.3s;
             margin-left: 30%;
         }
-
+        .search-name{
+            display: grid;
+            grid-template-columns: 33% 33% 20%;
+            place-items: center;
+        }
+        .search-name label{
+            margin-left: 30%;
+        }
+        .search-name input{
+            width: 90%;
+        }
+        .search-name button{
+            margin-left: 0px;
+        }
         .button-link + .button-link {
-            margin-left: 10px; /* Adjust the spacing between buttons */
+            margin-left: 10px;
         }
 
         .button-link:hover {
@@ -224,10 +237,9 @@
             </div>
         </div>
     </div>
-    <form method="get" action="/wineries">
+    <form method="get" action="/wineries" class="search-name">
         <label for="wineryName">Search by winery name</label>
         <input type="text" name="wineryName" placeholder="Winery Name" id="wineryName">
-        <!-- Apply the new class to the button -->
         <button type="submit" class="button-link">Submit</button>
     </form>
     <div><h1>All wineries</h1></div>
