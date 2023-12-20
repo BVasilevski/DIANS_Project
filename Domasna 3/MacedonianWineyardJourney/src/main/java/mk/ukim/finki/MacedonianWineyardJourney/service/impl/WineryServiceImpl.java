@@ -1,6 +1,7 @@
 package mk.ukim.finki.MacedonianWineyardJourney.service.impl;
 
 import mk.ukim.finki.MacedonianWineyardJourney.model.Winery;
+import mk.ukim.finki.MacedonianWineyardJourney.model.exception.InvalidWineryIdException;
 import mk.ukim.finki.MacedonianWineyardJourney.repository.WineryRepository;
 import mk.ukim.finki.MacedonianWineyardJourney.service.WineryService;
 import org.springframework.stereotype.Service;
@@ -44,5 +45,11 @@ public class WineryServiceImpl implements WineryService {
     @Override
     public void save(Winery winery) {
         this.repository.save(winery);
+    }
+
+    @Override
+    public void delete(Long id) {
+        Winery winery = this.repository.findById(id).orElseThrow(InvalidWineryIdException::new);
+        this.repository.delete(winery);
     }
 }

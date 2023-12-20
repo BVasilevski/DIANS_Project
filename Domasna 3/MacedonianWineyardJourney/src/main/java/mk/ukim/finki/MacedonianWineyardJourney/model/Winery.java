@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -17,7 +18,6 @@ public class Winery implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @SerializedName("Име")
     private String name;
     @SerializedName("Локација")
@@ -31,7 +31,16 @@ public class Winery implements Serializable {
 
     @SerializedName("Локација Мапа")
     private String mapLocation;
-
     @ManyToMany(mappedBy = "recentlyVisited")
     private List<User> visitors;
+
+    public Winery(String name, String location, String town, String workingHours, String activity, String mapLocation) {
+        this.name = name;
+        this.location = location;
+        this.town = town;
+        this.workingHours = workingHours;
+        this.activity = activity;
+        this.mapLocation = mapLocation;
+        this.visitors = new ArrayList<>();
+    }
 }

@@ -6,7 +6,8 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background: url("/static/BgBlack.png") no-repeat;
+            background: url("BgBlack.png") no-repeat;
+            background-size: cover;
             margin: 0;
             display: flex;
             justify-content: center;
@@ -60,12 +61,9 @@
         <br><br>
         <button type="button" onclick="window.location.href='/register'">Register</button>
     </form>
-<!--<<<<<<< Updated upstream-->
-<!--=======-->
-<!--    <th:block th:if="${hasError}">-->
-<!--        <div th:text="${error}" style="color:red; text-align: center"></div>-->
-<!--    </th:block>-->
-<!--&gt;>>>>>> Stashed changes-->
+    <th:block th:if="${hasError}">
+        <p style="color:black; text-align: center">Invalid Credentials</p>
+    </th:block>
 </div>
 </body>
 </html>

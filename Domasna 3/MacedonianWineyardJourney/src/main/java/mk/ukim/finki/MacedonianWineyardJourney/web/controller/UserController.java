@@ -57,7 +57,6 @@ public class UserController {
             user = userService.login(username, password);
         } catch (InvalidUserCredentialsException e) {
             model.addAttribute("hasError", true);
-            model.addAttribute("error", e.getMessage());
             return "login";
         }
         request.getSession().setAttribute("user", user);

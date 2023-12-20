@@ -190,6 +190,11 @@
             }
         }
 
+        p {
+            text-align: center;
+            margin-top: 10%;
+        }
+
     </style>
 </head>
 <body>
@@ -199,6 +204,8 @@
         <a th:href="@{'/home'}">Home</a>
         <a th:href="@{'/wineries'}">Wineries</a>
         <a th:href="@{'/about-us'}">About us</a>
+        <a th:if="${session.user == null}" th:href="@{'/login'}">Login</a>
+        <a th:if="${session.user != null}" th:href="@{'/logout'}">Logout</a>
     </div>
 </div>
 <div class="row2">
@@ -206,7 +213,11 @@
             <span class="arrow"></span>
             <span class="container-name-sheet">
                 <span class="name-B"></span>
-                <span class="sheet"> #Index Skopje</span>
+                <span class="sheet">
+                    <p>Bojan Vasilevski</p>
+                    <p>Skopje</p>
+                    <p>211165</p>
+                </span>
             </span>
         </span>
 </div>
@@ -214,7 +225,11 @@
         <span class="container-darko">
             <span class="container-name-sheet">
                 <span class="name-D"></span>
-                <span class="sheet">#Index Shtip</span>
+                <span class="sheet">
+                    <p>Darko Divanisov</p>
+                    <p>Shtip</p>
+                    <p>201023</p>
+                </span>
             </span>
             <span></span>
         </span>
@@ -230,16 +245,13 @@
             <span></span>
             <span class="container-name-sheet">
                 <span class="name-L"></span>
-                <span class="sheet">#Index Probishtip</span>
+                <span class="sheet">
+                    <p>Lihnida Jovanova</p>
+                    <p>Probishtip</p>
+                    <p>201034</p>
+                </span>
             </span>
         </span>
-<!--    <div class="navbar">-->
-<!--        <a th:href="@{'/home'}">Home</a>-->
-<!--        <a th:href="@{'/wineries'}">Wineries</a>-->
-<!--        <a th:href="@{'/about-us'}">About us</a>-->
-<!--        <a th:if="${session.user == null}" th:href="@{'/login'}">Login</a>-->
-<!--        <a th:if="${session.user != null}" th:href="@{'/logout'}">Logout</a>-->
-<!--    </div>-->
 </div>
 </body>
 </html>

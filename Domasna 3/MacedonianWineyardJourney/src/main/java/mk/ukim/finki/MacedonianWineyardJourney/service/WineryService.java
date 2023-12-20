@@ -17,4 +17,6 @@ public interface WineryService {
     Optional<Winery> findById(Long id);
 
     void save(Winery winery);
+
+    void delete(Long id);
 }

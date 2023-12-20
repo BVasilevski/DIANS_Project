@@ -8,9 +8,7 @@ import mk.ukim.finki.MacedonianWineyardJourney.service.UserService;
 import mk.ukim.finki.MacedonianWineyardJourney.service.WineryService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
@@ -67,5 +65,23 @@ public class WineryController {
             return "wineries";
         }
         return "add-page";
+    }
+
+    @PostMapping("/wineries/add")
+    public String addWinery(@RequestParam String name,
+                            @RequestParam String location,
+                            @RequestParam String workingHours,
+                            @RequestParam String town,
+                            @RequestParam String activity,
+                            @RequestParam String coordinates) {
+        Winery winery = new Winery(name, location, workingHours, town, activity, coordinates);
+        this.wineryService.save(winery);
+        return "redirect:/wineries";
+    }
+
+    @PostMapping("/wineries/delete/{id}")
+    public String deleteWinery(@PathVariable Long id) {
+        this.wineryService.delete(id);
+        return "redirect:/wineries";
     }
 }

@@ -58,7 +58,7 @@ public class UserServiceImpl implements UserService {
 
             // Create a temporary list without the first element
             List<Winery> tempRecentlyVisited = new ArrayList<>(recentlyVisited);
-            if (!tempRecentlyVisited.isEmpty() && tempRecentlyVisited.size() >= 5) {
+            if (!tempRecentlyVisited.isEmpty() && tempRecentlyVisited.size() >= 4) {
                 tempRecentlyVisited.remove(0);
             }
 

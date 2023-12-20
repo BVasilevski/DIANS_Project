@@ -26,7 +26,7 @@
             width: 100%;
             height: auto;
             margin: 0;
-            grid-template-rows: 20vh 80%;
+            grid-template-rows: 20vh auto auto auto;
             /*background: url("/static/BgBlack.png") ako go testirash samo HTML*/
             background: url("BgBlack.png") no-repeat;
             background-size: 100% 100%;
@@ -85,10 +85,23 @@
             margin-left: 5%;
             margin-right: 5%;
             margin-bottom: 5%;
+            border: white solid 1px;
+        }
 
+        .recently-visited {
+            margin-left: 5%;
+            margin-right: 5%;
+            margin-bottom: 5%;
+            border: white solid 1px;
+        }
+
+        h1 {
+            color: white;
+            text-align: center;
         }
 
         .winery-list {
+            margin-left: 5%;
             width: 100%;
             height: auto;
             padding: 2vh;
@@ -115,11 +128,6 @@
             margin-left: 25%;
         }
 
-        /* Style to move login, logout, and username to the right */
-        .navbar-right {
-            float: right;
-        }
-
         .navbar a, .navbar-right a {
             display: inline-block;
             color: white;
@@ -132,10 +140,43 @@
             background-color: #ddd;
             color: black;
         }
+
+        .button-link-recently {
+            display: inline-block;
+            padding: 10px 20px;
+            text-decoration: none;
+            background-color: #ff3131;
+            color: white;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+            margin-left: 30%;
+        }
+
+        .button-link {
+            display: inline-block;
+            padding: 10px 20px;
+            text-decoration: none;
+            background-color: #ff3131;
+            color: white;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+            margin-left: 15%;
+        }
+
+        .button-link + .button-link {
+            margin-left: 10px; /* Adjust the spacing between buttons */
+        }
+
+        .button-link:hover {
+            background-color: #c65673;
+        }
+
+        .button-link-recently:hover {
+            background-color: #c65673;
+        }
     </style>
 </head>
 <body>
-<<<<<<< Updated upstream
 <div class="container">
     <div class="row1">
         <div class="Logo"></div>
@@ -143,8 +184,46 @@
             <a th:href="@{'/home'}">Home</a>
             <a th:href="@{'/wineries'}">Wineries</a>
             <a th:href="@{'/about-us'}">About us</a>
+            <a th:if="${session.user?.getRole() ==
+            T(mk.ukim.finki.MacedonianWineyardJourney.model.Role).ROLE_ADMINISTRATOR}" th:href="@{'/wineries/add'}">Add
+                Winery</a>
+            <a th:if="${session.user == null}" th:href="@{'/login'}">Login</a>
+            <a th:if="${session.user != null}" th:href="@{'/logout'}">Logout</a>
         </div>
     </div>
+    <div th:if="${recentlyVisited?.size() > 0}">
+        <div><h1>Recently visited</h1></div>
+        <div class="recently-visited">
+            <div class="winery-list">
+                <ul th:each="winery : ${recentlyVisited}" class="winery-card">
+                    <li>
+                        <strong>Име:</strong>
+                        <span th:text="${winery.getName()}"></span>
+                    </li>
+                    <li>
+                        <strong>Локација:</strong>
+                        <span th:text="${winery.getLocation()}">asdasd</span>
+                    </li>
+                    <li>
+                        <strong>Град:</strong>
+                        <span th:text="${winery.getTown()}">asdasd</span>
+                    </li>
+                    <li>
+                        <strong>Работно време:</strong>
+                        <span th:text="${winery.getWorkingHours()}">asdasd</span>
+                    </li>
+                    <li>
+                        <strong>Дејност:</strong>
+                        <span th:text="${winery.getActivity()}">asdasd</span>
+                    </li>
+                    <a class="button-link-recently" th:href="@{'/wineries/show-map/{id}' (id=${winery.getId()})}">Show
+                        on
+                        map</a>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div><h1>All wineries</h1></div>
     <div class="row2">
         <div class="winery-list">
             <ul th:each="winery : ${wineries}" class="winery-card">
@@ -168,28 +247,28 @@
                     <strong>Дејност:</strong>
                     <span th:text="${winery.getActivity()}">asdasd</span>
                 </li>
-                <button>Show on map</button>
+                <div>
+                    <a class="button-link" th:href="@{'/wineries/show-map/{id}' (id=${winery.getId()})}">Show on map</a>
+                    <form method="post" th:action="@{'/wineries/delete/{id}' (id=${winery.getId()})}">
+                        <button th:if="${session.user?.getRole() ==
+                            T(mk.ukim.finki.MacedonianWineyardJourney.model.Role).ROLE_ADMINISTRATOR}"
+                                class="button-link" type="submit">Delete
+                        </button>
+                    </form>
+                </div>
             </ul>
         </div>
     </div>
 </div>
-<!--=======-->
-<!--<script th:inline="javascript">-->
-<!--    /*<![CDATA[*/-->
-<!--    // Check if a variable indicating access denied is set-->
-<!--    var accessDenied = /*[[${accessDenied}]]*/ false;-->
 
-<!--    // Display alert if access is denied-->
-<!--    if (accessDenied) {-->
-<!--        alert('Sorry, you don\'t have access to this page!'); // You can customize this alert message-->
-<!--    }-->
-<!--    /*]]>*/-->
-<!--</script>-->
-<!-- Navigation bar container -->
+<script th:inline="javascript">
+    // Check if a variable indicating access denied is set
+    var accessDenied = /*[[${accessDenied}]]*/ false;
 
-<!--<div th:if="${recentlyVisited != null and recentlyVisited.size() > 0}">-->
-<!--    <div th:each="winery : ${recentlyVisited}">-->
-<!--        <p th:text="${winery.getName()}"></p>-->
-<!--    </div>-->
+    // Display alert if access is denied
+    if (accessDenied) {
+        alert('Sorry, you don\'t have access to this page!'); // You can customize this alert message
+    }
+</script>
 </body>
 </html>

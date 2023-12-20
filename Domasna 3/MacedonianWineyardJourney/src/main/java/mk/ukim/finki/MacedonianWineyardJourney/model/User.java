@@ -29,7 +29,7 @@ public class User {//implements UserDetails {
     private boolean isAccountNonLocked = true;
     private boolean isCredentialsNonExpired = true;
     private boolean isEnabled = true;
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     private List<Winery> recentlyVisited;
 
     public User(String username, String password, String name, String surname) {
