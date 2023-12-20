@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 
@@ -31,8 +32,13 @@ public class WineryController {
 
     @GetMapping("/wineries")
     private String getMainPage(Model model, HttpServletRequest request) {
+        if (request.getParameter("wineryName") != null) {
+            List<Winery> wineries = this.wineryService.findAllByNameContains(request.getParameter("wineryName"));
+            model.addAttribute("wineries", wineries);
+        } else {
+            model.addAttribute("wineries", this.wineryService.findAll());
+        }
         User user = (User) request.getSession().getAttribute("user");
-        model.addAttribute("wineries", this.wineryService.findAll());
         if (user != null)
             model.addAttribute("recentlyVisited", this.userService.getRecentlyVisitedWineries(user.getUsername()));
         return "wineries";

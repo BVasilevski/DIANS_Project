@@ -160,7 +160,7 @@
             color: white;
             border-radius: 4px;
             transition: background-color 0.3s;
-            margin-left: 15%;
+            margin-left: 30%;
         }
 
         .button-link + .button-link {
@@ -174,6 +174,7 @@
         .button-link-recently:hover {
             background-color: #c65673;
         }
+
     </style>
 </head>
 <body>
@@ -223,6 +224,12 @@
             </div>
         </div>
     </div>
+    <form method="get" action="/wineries">
+        <label for="wineryName">Search by winery name</label>
+        <input type="text" name="wineryName" placeholder="Winery Name" id="wineryName">
+        <!-- Apply the new class to the button -->
+        <button type="submit" class="button-link">Submit</button>
+    </form>
     <div><h1>All wineries</h1></div>
     <div class="row2">
         <div class="winery-list">
@@ -247,7 +254,7 @@
                     <strong>Дејност:</strong>
                     <span th:text="${winery.getActivity()}">asdasd</span>
                 </li>
-                <div>
+                <div style="display: flex">
                     <a class="button-link" th:href="@{'/wineries/show-map/{id}' (id=${winery.getId()})}">Show on map</a>
                     <form method="post" th:action="@{'/wineries/delete/{id}' (id=${winery.getId()})}">
                         <button th:if="${session.user?.getRole() ==
@@ -262,12 +269,10 @@
 </div>
 
 <script th:inline="javascript">
-    // Check if a variable indicating access denied is set
     var accessDenied = /*[[${accessDenied}]]*/ false;
 
-    // Display alert if access is denied
     if (accessDenied) {
-        alert('Sorry, you don\'t have access to this page!'); // You can customize this alert message
+        alert('Sorry, you don\'t have access to this page!');
     }
 </script>
 </body>

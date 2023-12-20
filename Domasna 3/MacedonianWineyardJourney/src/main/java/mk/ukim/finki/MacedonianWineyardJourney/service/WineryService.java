@@ -19,4 +19,6 @@ public interface WineryService {
     void save(Winery winery);
 
     void delete(Long id);
+
+    List<Winery> findAllByNameContains(String wineryName);
 }
