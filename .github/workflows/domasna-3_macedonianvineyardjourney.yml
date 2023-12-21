@@ -1,3 +1,6 @@
+# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
+# More GitHub Actions for Azure: https://github.com/Azure/actions
+
 name: Build and deploy JAR app to Azure Web App - MacedonianVineyardJourney
 
 on:
@@ -8,44 +11,43 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
       - name: Set up Java version
-        uses: actions/setup-java@v2
+        uses: actions/setup-java@v1
         with:
-          java-version: '17'  # Adjust the Java version as needed
+          java-version: '17'
 
       - name: Build with Maven
-        run: ./mvnw clean install  # Use the Maven Wrapper if available
+        run: mvn clean install
 
       - name: Upload artifact for deployment job
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: java-app
           path: '${{ github.workspace }}/target/*.jar'
 
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     needs: build
     environment:
       name: 'Production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
-      
+
     steps:
       - name: Download artifact from build job
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: java-app
-      
+
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
-          app-name: 'MacedonianVineyardJourney'  # Update with your Azure Web App name
-          slot-name: 'Production'  # Update with your Azure Web App slot name
+          app-name: 'MacedonianVineyardJourney'
+          slot-name: 'Production'
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_C53E5F5C1DE84A9C912884D1EF658478 }}
           package: '*.jar'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_C957580883864692855A7262F2F6271D }}
