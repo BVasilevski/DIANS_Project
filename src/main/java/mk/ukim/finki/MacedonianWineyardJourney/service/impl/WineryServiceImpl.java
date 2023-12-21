@@ -48,6 +48,6 @@ public class WineryServiceImpl implements WineryService {
 
     @Override
     public List<Winery> findAllByNameContains(String wineryName) {
-        return this.wineryRepository.findAllByNameContains(wineryName);
+        return this.wineryRepository.findWineriesByNameContainingIgnoreCase(wineryName);
     }
 }
