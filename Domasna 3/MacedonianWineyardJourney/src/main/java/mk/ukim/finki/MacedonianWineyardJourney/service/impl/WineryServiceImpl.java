@@ -27,21 +27,6 @@ public class WineryServiceImpl implements WineryService {
     }
 
     @Override
-    public List<Winery> findByTown(String town) {
-        return this.wineryRepository.findByTown(town);
-    }
-
-    @Override
-    public List<Winery> findByName(String name) {
-        return this.wineryRepository.findByName(name);
-    }
-
-    @Override
-    public List<Winery> findByActivity(String activity) {
-        return this.wineryRepository.findByActivity(activity);
-    }
-
-    @Override
     public Optional<Winery> findById(Long id) {
         return this.wineryRepository.findById(id);
     }

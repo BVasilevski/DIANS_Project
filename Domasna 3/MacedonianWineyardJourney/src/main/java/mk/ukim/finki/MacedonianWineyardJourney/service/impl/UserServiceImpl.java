@@ -24,11 +24,6 @@ public class UserServiceImpl implements UserService {
         this.userRepository = userRepository;
         this.wineryRepository = wineryRepository;
     }
-
-    public User findByUsername(String username) {
-        return this.userRepository.findByUsername(username).orElseThrow(UserNotFoundException::new);
-    }
-
     @Override
     public List<Winery> getRecentlyVisitedWineries(String username) {
         User user = this.userRepository.findByUsername(username).orElseThrow(UserNotFoundException::new);
@@ -47,25 +42,20 @@ public class UserServiceImpl implements UserService {
         if (winery.isPresent() && user != null) {
             List<Winery> recentlyVisited = user.getRecentlyVisited();
 
-            // Check if the winery is already in the list
             boolean wineryExists = recentlyVisited.stream()
                     .anyMatch(w -> w.getId().equals(wineryId));
 
             if (wineryExists) {
-                // Remove the previous appearance of the winery
                 recentlyVisited.removeIf(w -> w.getId().equals(wineryId));
             }
 
-            // Create a temporary list without the first element
             List<Winery> tempRecentlyVisited = new ArrayList<>(recentlyVisited);
             if (!tempRecentlyVisited.isEmpty() && tempRecentlyVisited.size() >= 4) {
                 tempRecentlyVisited.remove(0);
             }
 
-            // Add the new winery to the temporary list
             tempRecentlyVisited.add(winery.get());
 
-            // Clear the main list and add the elements from the temporary list
             user.getRecentlyVisited().clear();
             user.getRecentlyVisited().addAll(tempRecentlyVisited);
         }

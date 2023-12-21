@@ -166,6 +166,10 @@
             display: grid;
             grid-template-columns: 33% 33% 20%;
             place-items: center;
+            border: 2px solid white;
+            margin-left: 5%;
+            margin-right: 5%;
+            padding: 5px;
         }
         .search-name label{
             margin-left: 30%;
@@ -216,19 +220,19 @@
                     </li>
                     <li>
                         <strong>Локација:</strong>
-                        <span th:text="${winery.getLocation()}">asdasd</span>
+                        <span th:text="${winery.getLocation()}"></span>
                     </li>
                     <li>
                         <strong>Град:</strong>
-                        <span th:text="${winery.getTown()}">asdasd</span>
+                        <span th:text="${winery.getTown()}"></span>
                     </li>
                     <li>
                         <strong>Работно време:</strong>
-                        <span th:text="${winery.getWorkingHours()}">asdasd</span>
+                        <span th:text="${winery.getWorkingHours()}"></span>
                     </li>
                     <li>
                         <strong>Дејност:</strong>
-                        <span th:text="${winery.getActivity()}">asdasd</span>
+                        <span th:text="${winery.getActivity()}"></span>
                     </li>
                     <a class="button-link-recently" th:href="@{'/wineries/show-map/{id}' (id=${winery.getId()})}">Show
                         on
@@ -238,9 +242,9 @@
         </div>
     </div>
     <form method="get" action="/wineries" class="search-name">
-        <label for="wineryName">Search by winery name</label>
-        <input type="text" name="wineryName" placeholder="Winery Name" id="wineryName">
-        <button type="submit" class="button-link">Submit</button>
+        <label for="wineryName"></label>
+        <input type="text" name="wineryName" placeholder="Winery Name" id="wineryName" style="height: auto">
+        <button type="submit" class="button-link">Search</button>
     </form>
     <div><h1>All wineries</h1></div>
     <div class="row2">

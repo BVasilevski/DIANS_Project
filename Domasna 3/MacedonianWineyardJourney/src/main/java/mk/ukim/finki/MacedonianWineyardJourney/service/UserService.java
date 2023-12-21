@@ -8,12 +8,11 @@ import java.util.Optional;
 
 public interface UserService {
     List<Winery> getRecentlyVisitedWineries(String username);
+
     void addToRecentlyVisited(String username, Long wineryId);
 
     void save(User user);
 
     User login(String username, String password);
 
-
-    User findByUsername(String username);
 }

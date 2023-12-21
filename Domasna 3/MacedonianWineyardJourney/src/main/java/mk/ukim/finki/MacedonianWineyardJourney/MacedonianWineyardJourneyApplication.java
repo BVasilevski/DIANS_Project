@@ -1,12 +1,16 @@
 package mk.ukim.finki.MacedonianWineyardJourney;
 
+import mk.ukim.finki.MacedonianWineyardJourney.model.Winery;
 import mk.ukim.finki.MacedonianWineyardJourney.service.impl.LoadDataService;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.util.List;
+
 
 @SpringBootApplication
-public class MacedonianWineyardJourneyApplication {
+public class MacedonianWineyardJourneyApplication{
     public static void main(String[] args) {
         SpringApplication.run(MacedonianWineyardJourneyApplication.class, args);
     }
