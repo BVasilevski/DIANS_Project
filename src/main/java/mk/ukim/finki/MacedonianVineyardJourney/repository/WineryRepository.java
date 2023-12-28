@@ -1,6 +1,6 @@
-package mk.ukim.finki.MacedonianWineyardJourney.repository;
+package mk.ukim.finki.MacedonianVineyardJourney.repository;
 
-import mk.ukim.finki.MacedonianWineyardJourney.model.Winery;
+import mk.ukim.finki.MacedonianVineyardJourney.model.Winery;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

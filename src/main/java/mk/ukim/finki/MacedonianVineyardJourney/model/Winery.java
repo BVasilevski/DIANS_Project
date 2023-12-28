@@ -1,4 +1,4 @@
-package mk.ukim.finki.MacedonianWineyardJourney.model;
+package mk.ukim.finki.MacedonianVineyardJourney.model;
 
 import com.google.gson.annotations.SerializedName;
 import jakarta.persistence.*;

@@ -1,4 +1,4 @@
-package mk.ukim.finki.MacedonianWineyardJourney.model.exception;
+package mk.ukim.finki.MacedonianVineyardJourney.model.exception;
 
 public class UserNotFoundException extends RuntimeException {
     public UserNotFoundException() {

@@ -203,7 +203,7 @@
             <a th:href="@{'/wineries'}">Wineries</a>
             <a th:href="@{'/about-us'}">About us</a>
             <a th:if="${session.user?.getRole() ==
-            T(mk.ukim.finki.MacedonianWineyardJourney.model.Role).ROLE_ADMINISTRATOR}" th:href="@{'/wineries/add'}">Add
+            T(mk.ukim.finki.MacedonianVineyardJourney.model.Role).ROLE_ADMINISTRATOR}" th:href="@{'/wineries/add'}">Add
                 Winery</a>
             <a th:if="${session.user == null}" th:href="@{'/login'}">Login</a>
             <a th:if="${session.user != null}" th:href="@{'/logout'}">Logout</a>
@@ -274,7 +274,7 @@
                     <a class="button-link" th:href="@{'/wineries/show-map/{id}' (id=${winery.getId()})}">Show on map</a>
                     <form method="post" th:action="@{'/wineries/delete/{id}' (id=${winery.getId()})}">
                         <button th:if="${session.user?.getRole() ==
-                            T(mk.ukim.finki.MacedonianWineyardJourney.model.Role).ROLE_ADMINISTRATOR}"
+                            T(mk.ukim.finki.MacedonianVineyardJourney.model.Role).ROLE_ADMINISTRATOR}"
                                 class="button-link" type="submit">Delete
                         </button>
                     </form>

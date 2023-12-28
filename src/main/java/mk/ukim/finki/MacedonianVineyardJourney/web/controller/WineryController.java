@@ -1,17 +1,16 @@
-package mk.ukim.finki.MacedonianWineyardJourney.web.controller;
+package mk.ukim.finki.MacedonianVineyardJourney.web.controller;
 
 import jakarta.servlet.http.HttpServletRequest;
-import mk.ukim.finki.MacedonianWineyardJourney.model.Role;
-import mk.ukim.finki.MacedonianWineyardJourney.model.User;
-import mk.ukim.finki.MacedonianWineyardJourney.model.Winery;
-import mk.ukim.finki.MacedonianWineyardJourney.service.UserService;
-import mk.ukim.finki.MacedonianWineyardJourney.service.WineryService;
+import mk.ukim.finki.MacedonianVineyardJourney.model.Role;
+import mk.ukim.finki.MacedonianVineyardJourney.model.User;
+import mk.ukim.finki.MacedonianVineyardJourney.model.Winery;
+import mk.ukim.finki.MacedonianVineyardJourney.service.UserService;
+import mk.ukim.finki.MacedonianVineyardJourney.service.WineryService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 
 @Controller
@@ -32,15 +31,19 @@ public class WineryController {
 
     @GetMapping("/wineries")
     private String getMainPage(Model model, HttpServletRequest request) {
-        if (request.getParameter("wineryName") != null) {
-            List<Winery> wineries = this.wineryService.findAllByNameContains(request.getParameter("wineryName"));
+        String wineryName = request.getParameter("wineryName");
+
+        if (wineryName != null) {
+            List<Winery> wineries = this.wineryService.findAllByNameContains(wineryName);
             model.addAttribute("wineries", wineries);
         } else {
             model.addAttribute("wineries", this.wineryService.findAll());
         }
+
         User user = (User) request.getSession().getAttribute("user");
-        if (user != null)
+        if (user != null) {
             model.addAttribute("recentlyVisited", this.userService.getRecentlyVisitedWineries(user.getUsername()));
+        }
         return "wineries";
     }
 
@@ -51,14 +54,7 @@ public class WineryController {
 
     @GetMapping("wineries/show-map/{id}")
     public String showOnMap(@PathVariable Long id, Model model, HttpServletRequest request) {
-        User user = (User) request.getSession().getAttribute("user");
-        Optional<Winery> winery = this.wineryService.findById(id);
-        if (winery.isPresent()) {
-            model.addAttribute("destinationAddress", winery.get().getMapLocation());
-            model.addAttribute("winery", winery.get());
-            if (user != null)
-                this.userService.addToRecentlyVisited(user.getUsername(), winery.get().getId());
-        }
+        this.wineryService.showWineryOnMap(id, model, request);
         return "map";
     }
 

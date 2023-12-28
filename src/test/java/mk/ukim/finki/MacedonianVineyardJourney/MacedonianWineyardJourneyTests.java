@@ -1,4 +1,4 @@
-package mk.ukim.finki.MacedonianWineyardJourney;
+package mk.ukim.finki.MacedonianVineyardJourney;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

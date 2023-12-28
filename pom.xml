@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>mk.ukim.finki</groupId>
-    <artifactId>MacedonianWineyardJourney</artifactId>
+    <artifactId>MacedonianVineyardJourney</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>WineYardJourney</name>
     <description>WineYardJourney</description>
