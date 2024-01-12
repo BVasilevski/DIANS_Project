@@ -10,9 +10,9 @@ import java.util.Optional;
 public interface WineryService {
     List<Winery> findAll();
 
-    Optional<Winery> findById(Long id);
+    Winery findById(Long id);
 
-    void save(Winery winery);
+    void save(String name, String location, String workingHours, String town, String activity, String coordinates);
 
     void delete(Long id);
 

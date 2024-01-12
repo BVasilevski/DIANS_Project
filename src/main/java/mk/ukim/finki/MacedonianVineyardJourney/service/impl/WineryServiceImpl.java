@@ -3,6 +3,7 @@ package mk.ukim.finki.MacedonianVineyardJourney.service.impl;
 import jakarta.servlet.http.HttpServletRequest;
 import mk.ukim.finki.MacedonianVineyardJourney.model.User;
 import mk.ukim.finki.MacedonianVineyardJourney.model.Winery;
+import mk.ukim.finki.MacedonianVineyardJourney.model.WineryFactory;
 import mk.ukim.finki.MacedonianVineyardJourney.model.exception.InvalidWineryIdException;
 import mk.ukim.finki.MacedonianVineyardJourney.repository.UserRepository;
 import mk.ukim.finki.MacedonianVineyardJourney.repository.WineryRepository;
@@ -12,18 +13,19 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class WineryServiceImpl implements WineryService {
     private final WineryRepository wineryRepository;
-    private final UserRepository userRepository;
     private final UserService userService;
+    private final UserRepository userRepository;
+    private final WineryFactory wineryFactory;
 
-    public WineryServiceImpl(WineryRepository repository, UserRepository userRepository, UserService userService) {
+    public WineryServiceImpl(WineryRepository repository, UserService userService, UserRepository userRepository, WineryFactory wineryFactory) {
         this.wineryRepository = repository;
-        this.userRepository = userRepository;
         this.userService = userService;
+        this.userRepository = userRepository;
+        this.wineryFactory = wineryFactory;
     }
 
     @Override
@@ -32,22 +34,25 @@ public class WineryServiceImpl implements WineryService {
     }
 
     @Override
-    public Optional<Winery> findById(Long id) {
-        return this.wineryRepository.findById(id);
+    public Winery findById(Long id) {
+        return this.wineryRepository.findById(id).orElseThrow(InvalidWineryIdException::new);
     }
 
     @Override
-    public void save(Winery winery) {
+    public void save(String name, String location, String workingHours, String town, String activity, String coordinates) {
+        Winery winery = wineryFactory.createWinery(name, location, workingHours, town, activity, coordinates);
         this.wineryRepository.save(winery);
     }
 
     @Override
     public void delete(Long id) {
         List<User> users = this.userRepository.findAll();
+        Winery winery = this.findById(id);
+
         for (User user : users) {
-            user.getRecentlyVisited().removeIf(winery -> winery.getId().equals(id));
+            user.getRecentlyVisited().removeIf(win -> win.getId().equals(winery.getId()));
         }
-        Winery winery = this.wineryRepository.findById(id).orElseThrow(InvalidWineryIdException::new);
+
         this.wineryRepository.delete(winery);
     }
 
@@ -59,15 +64,14 @@ public class WineryServiceImpl implements WineryService {
     @Override
     public void showWineryOnMap(Long id, Model model, HttpServletRequest request) {
         User user = (User) request.getSession().getAttribute("user");
-        Optional<Winery> winery = findById(id);
+        Winery winery = findById(id);
 
-        if (winery.isPresent()) {
-            model.addAttribute("destinationAddress", winery.get().getMapLocation());
-            model.addAttribute("winery", winery.get());
+        model.addAttribute("destinationAddress", winery.getMapLocation());
+        model.addAttribute("winery", winery);
 
-            if (user != null) {
-                userService.addToRecentlyVisited(user.getUsername(), winery.get().getId());
-            }
+        if (user != null) {
+            userService.addToRecentlyVisited(user.getUsername(), winery.getId());
         }
     }
 }
+

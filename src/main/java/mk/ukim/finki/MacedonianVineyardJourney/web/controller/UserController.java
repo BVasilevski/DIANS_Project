@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 @RequestMapping("/")
 public class UserController {
-
     private final UserService userService;
 
     public UserController(UserService userService) {

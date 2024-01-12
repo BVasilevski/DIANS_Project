@@ -13,5 +13,4 @@ public interface UserService {
     void save(String username, String password, String name, String surname);
 
     User login(String username, String password);
-
 }

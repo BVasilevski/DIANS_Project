@@ -76,8 +76,7 @@ public class WineryController {
                             @RequestParam String town,
                             @RequestParam String activity,
                             @RequestParam String coordinates) {
-        Winery winery = new Winery(name, location, workingHours, town, activity, coordinates);
-        this.wineryService.save(winery);
+        this.wineryService.save(name, location, workingHours, town, activity, coordinates);
         return "redirect:/wineries";
     }
 
