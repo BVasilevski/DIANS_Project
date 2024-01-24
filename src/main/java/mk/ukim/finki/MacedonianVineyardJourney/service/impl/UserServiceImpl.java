@@ -2,11 +2,11 @@ package mk.ukim.finki.MacedonianVineyardJourney.service.impl;
 
 import jakarta.transaction.Transactional;
 import mk.ukim.finki.MacedonianVineyardJourney.model.User;
-import mk.ukim.finki.MacedonianVineyardJourney.model.UserFactory;
 import mk.ukim.finki.MacedonianVineyardJourney.model.Winery;
 import mk.ukim.finki.MacedonianVineyardJourney.model.exception.InvalidUserCredentialsException;
 import mk.ukim.finki.MacedonianVineyardJourney.model.exception.InvalidWineryIdException;
 import mk.ukim.finki.MacedonianVineyardJourney.model.exception.UserNotFoundException;
+import mk.ukim.finki.MacedonianVineyardJourney.model.exception.UserWithUsernameAlreadyExistsException;
 import mk.ukim.finki.MacedonianVineyardJourney.repository.UserRepository;
 import mk.ukim.finki.MacedonianVineyardJourney.repository.WineryRepository;
 import mk.ukim.finki.MacedonianVineyardJourney.service.UserService;
@@ -14,21 +14,20 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final WineryRepository wineryRepository;
-    private final UserFactory userFactory;
 
-    public UserServiceImpl(UserRepository userRepository, WineryRepository wineryRepository, UserFactory userFactory) {
+    public UserServiceImpl(UserRepository userRepository, WineryRepository wineryRepository) {
         this.userRepository = userRepository;
         this.wineryRepository = wineryRepository;
-        this.userFactory = userFactory;
     }
 
     @Override
-    public List<Winery> getRecentlyVisitedWineries(String username) {
+    public List<Winery> getRecentlyVisitedWineriesForUserWithUsername(String username) {
         User user = this.userRepository.findByUsername(username).orElseThrow(UserNotFoundException::new);
         return user.getRecentlyVisited();
     }
@@ -60,8 +59,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void save(String username, String password, String name, String surname) {
-        User user = userFactory.createUser(username, password, name, surname);
+    public void register(String username, String password, String name, String surname) {
+        if (userRepository.findByUsername(username).isPresent()) {
+            throw new UserWithUsernameAlreadyExistsException();
+        }
+        User user = new User(username, password, name, surname);
         userRepository.save(user);
     }
 
@@ -69,5 +71,10 @@ public class UserServiceImpl implements UserService {
     public User login(String username, String password) {
         return userRepository.findByUsernameAndPassword(username, password)
                 .orElseThrow(InvalidUserCredentialsException::new);
+    }
+
+    @Override
+    public User findByUsername(String username) {
+        return userRepository.findByUsername(username).orElseThrow(UserNotFoundException::new);
     }
 }

@@ -7,8 +7,4 @@ import java.util.List;
 
 public interface WineryRepository extends JpaRepository<Winery, Long> {
     List<Winery> findWineriesByNameContainingIgnoreCase(String name);
-
-    Winery save(Winery winery);
-
-    void deleteById(Long id);
 }

@@ -42,7 +42,7 @@ public class WineryController {
 
         User user = (User) request.getSession().getAttribute("user");
         if (user != null) {
-            model.addAttribute("recentlyVisited", this.userService.getRecentlyVisitedWineries(user.getUsername()));
+            model.addAttribute("recentlyVisited", this.userService.getRecentlyVisitedWineriesForUserWithUsername(user.getUsername()));
         }
         return "wineries";
     }

@@ -65,6 +65,9 @@
 
         <button type="submit">Register</button>
     </form>
+    <th:block th:if="${hasError}">
+        <p style="color:black; text-align: center">Username already exists</p>
+    </th:block>
 </div>
 </body>
 </html>

@@ -3,7 +3,6 @@ package mk.ukim.finki.MacedonianVineyardJourney.service.impl;
 import jakarta.servlet.http.HttpServletRequest;
 import mk.ukim.finki.MacedonianVineyardJourney.model.User;
 import mk.ukim.finki.MacedonianVineyardJourney.model.Winery;
-import mk.ukim.finki.MacedonianVineyardJourney.model.WineryFactory;
 import mk.ukim.finki.MacedonianVineyardJourney.model.exception.InvalidWineryIdException;
 import mk.ukim.finki.MacedonianVineyardJourney.repository.UserRepository;
 import mk.ukim.finki.MacedonianVineyardJourney.repository.WineryRepository;
@@ -19,13 +18,11 @@ public class WineryServiceImpl implements WineryService {
     private final WineryRepository wineryRepository;
     private final UserService userService;
     private final UserRepository userRepository;
-    private final WineryFactory wineryFactory;
 
-    public WineryServiceImpl(WineryRepository repository, UserService userService, UserRepository userRepository, WineryFactory wineryFactory) {
+    public WineryServiceImpl(WineryRepository repository, UserService userService, UserRepository userRepository) {
         this.wineryRepository = repository;
         this.userService = userService;
         this.userRepository = userRepository;
-        this.wineryFactory = wineryFactory;
     }
 
     @Override
@@ -40,7 +37,7 @@ public class WineryServiceImpl implements WineryService {
 
     @Override
     public void save(String name, String location, String workingHours, String town, String activity, String coordinates) {
-        Winery winery = wineryFactory.createWinery(name, location, workingHours, town, activity, coordinates);
+        Winery winery = new Winery(name, location, workingHours, town, activity, coordinates);
         this.wineryRepository.save(winery);
     }
 
