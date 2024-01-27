@@ -3,7 +3,6 @@ package mk.ukim.finki.MacedonianVineyardJourney.web.controller;
 import jakarta.servlet.http.HttpServletRequest;
 import mk.ukim.finki.MacedonianVineyardJourney.model.User;
 import mk.ukim.finki.MacedonianVineyardJourney.model.exception.InvalidUserCredentialsException;
-import mk.ukim.finki.MacedonianVineyardJourney.model.exception.UserNotFoundException;
 import mk.ukim.finki.MacedonianVineyardJourney.model.exception.UserWithUsernameAlreadyExistsException;
 import mk.ukim.finki.MacedonianVineyardJourney.service.UserService;
 import org.springframework.stereotype.Controller;

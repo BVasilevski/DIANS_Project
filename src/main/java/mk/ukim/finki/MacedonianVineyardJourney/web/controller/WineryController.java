@@ -62,7 +62,6 @@ public class WineryController {
     public String getAddWineryPage(HttpServletRequest request, Model model) {
         User user = (User) request.getSession().getAttribute("user");
         if (user == null || user.getRole().equals(Role.ROLE_USER)) {
-            model.addAttribute("accessDenied", true);
             model.addAttribute("wineries", this.wineryService.findAll());
             return "wineries";
         }

@@ -15,8 +15,6 @@
             display: grid;
             width: 100%;
             height: 100vh;
-            /*background: url("/static/BgBlack.png") ako go testirash samo HTML*/
-            /*Za sekoja dole toa vazhi*/
             background: url("BgBlack.png") no-repeat;
             background-size: cover;
         }
@@ -27,7 +25,6 @@
             height: auto;
             margin: 0;
             grid-template-rows: 20vh auto auto auto auto;
-            /*background: url("/static/BgBlack.png") ako go testirash samo HTML*/
             background: url("BgBlack.png") no-repeat;
             background-size: 100% 100%;
         }
@@ -162,7 +159,8 @@
             transition: background-color 0.3s;
             margin-left: 30%;
         }
-        .search-name{
+
+        .search-name {
             display: grid;
             grid-template-columns: 33% 33% 20%;
             place-items: center;
@@ -171,15 +169,19 @@
             margin-right: 5%;
             padding: 5px;
         }
-        .search-name label{
+
+        .search-name label {
             margin-left: 30%;
         }
-        .search-name input{
+
+        .search-name input {
             width: 90%;
         }
-        .search-name button{
+
+        .search-name button {
             margin-left: 0px;
         }
+
         .button-link + .button-link {
             margin-left: 10px;
         }
@@ -283,13 +285,5 @@
         </div>
     </div>
 </div>
-
-<script th:inline="javascript">
-    var accessDenied = /*[[${accessDenied}]]*/ false;
-
-    if (accessDenied) {
-        alert('Sorry, you don\'t have access to this page!');
-    }
-</script>
 </body>
 </html>
